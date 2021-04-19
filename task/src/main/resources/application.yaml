@@ -4,3 +4,4 @@ spring:
 
 # For tests
 logging.level.org.springframework.cloud.sleuth: DEBUG
+logging.level.org.springframework.cloud.task: DEBUG

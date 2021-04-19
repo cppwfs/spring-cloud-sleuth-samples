@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.cloud.task.configuration.EnableTask;
+import org.springframework.cloud.task.listener.TaskExecutionListener;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
@@ -31,5 +32,10 @@ public class SpringCloudTaskApplication {
 	@Bean
 	ApplicationRunner myApplicationRunner(Tracer tracer) {
 		return args -> log.info("<ACCEPTANCE_TEST> <TRACE:{}> Hello from producer", tracer.currentSpan().context().traceId());
+	}
+
+	@Bean
+	TaskExecutionListener taskExecutionListener(Tracer tracer) {
+		return new MyTaskExecutionListener(tracer);
 	}
 }
